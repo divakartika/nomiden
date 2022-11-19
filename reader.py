@@ -26,6 +26,7 @@ def nik(idnum, data):
     birth_str = f'{birth_date}/{birth_month}/{birth_year}'
     birth_raw = datetime.strptime(birth_str, '%d/%m/%y')
     birthday = birth_raw.strftime("%d %B %Y")
+    
     today = date.today()
     age = today.year - birth_raw.year - ((today.month, today.day) < (birth_raw.month, birth_raw.day))
 
