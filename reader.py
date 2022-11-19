@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 
 def nik(idnum, data):
     idnum = str(idnum)
@@ -23,8 +23,11 @@ def nik(idnum, data):
     else:
         raise("birth_date must be between 1 to 71")
 
-    birthday_str = f'{birth_date}/{birth_month}/{birth_year}'
-    birthday = datetime.strptime(birthday_str, '%d/%m/%y')
+    birth_str = f'{birth_date}/{birth_month}/{birth_year}'
+    birth_raw = datetime.strptime(birth_str, '%d/%m/%y')
+    birthday = birth_raw.strftime("%d %B %Y")
+    today = date.today()
+    age = today.year - birth_raw.year - ((today.month, today.day) < (birth_raw.month, birth_raw.day))
 
-    return prov, city, dist, gender, birthday, nth_person
+    return prov, city, dist, gender, birthday, age, nth_person
     
