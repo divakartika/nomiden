@@ -1,5 +1,8 @@
 from datetime import date, datetime
-from data import regioncode as rc
+import pandas as pd
+from data.processing import regioncode as rc
+
+# rc = pd.read_csv('data/regioncode.csv')
 
 def province(idnum):
     idnum = str(idnum)

@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from data import regioncode as rc
+from data.processing import regioncode as rc
 
 def nik(idnum):
     idnum = str(idnum)
@@ -52,3 +52,5 @@ def kk(idnum):
     reg = reg_dttm.strftime("%d %B %Y")
 
     return prov, city, dist, reg_dttm, reg, nth_pub
+
+# TO DO: def(npwp)
