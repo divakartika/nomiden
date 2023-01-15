@@ -11,9 +11,9 @@ def province(idnum):
         prov = rc.loc[rc['code'] == prov_code, 'region'].item()
         return prov
     elif len(idnum) < 16:
-        raise ValueError(f'Identification number (NIK) is too short ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too short ({len(idnum)} characters), length should be 16')
     elif len(idnum) > 16:
-        raise ValueError(f'Identification number (NIK) is too long ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too long ({len(idnum)} characters), length should be 16')
     else:
         raise 
 
@@ -25,9 +25,9 @@ def city(idnum):
         city = rc.loc[rc['code'] == city_code, 'region'].item()
         return city
     elif len(idnum) < 16:
-        raise ValueError(f'Identification number (NIK) is too short ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too short ({len(idnum)} characters), length should be 16')
     elif len(idnum) > 16:
-        raise ValueError(f'Identification number (NIK) is too long ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too long ({len(idnum)} characters), length should be 16')
     else:
         raise 
 
@@ -40,9 +40,9 @@ def district(idnum):
         dist = rc.loc[rc['code'] == dist_code, 'region'].item()
         return dist
     elif len(idnum) < 16:
-        raise ValueError(f'Identification number (NIK) is too short ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too short ({len(idnum)} characters), length should be 16')
     elif len(idnum) > 16:
-        raise ValueError(f'Identification number (NIK) is too long ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too long ({len(idnum)} characters), length should be 16')
     else:
         raise 
 
@@ -56,9 +56,9 @@ def regdate(idnum):
         rdate = rdtm.day
         return rdate
     elif len(idnum) < 16:
-        raise ValueError(f'Identification number (NIK) is too short ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too short ({len(idnum)} characters), length should be 16')
     elif len(idnum) > 16:
-        raise ValueError(f'Identification number (NIK) is too long ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too long ({len(idnum)} characters), length should be 16')
     else:
         raise 
 
@@ -72,9 +72,9 @@ def regmonth(idnum):
         rmonth = rdtm.month
         return rmonth
     elif len(idnum) < 16:
-        raise ValueError(f'Identification number (NIK) is too short ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too short ({len(idnum)} characters), length should be 16')
     elif len(idnum) > 16:
-        raise ValueError(f'Identification number (NIK) is too long ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too long ({len(idnum)} characters), length should be 16')
     else:
         raise 
 
@@ -88,9 +88,9 @@ def regyear(idnum):
         ryear = rdtm.year
         return ryear
     elif len(idnum) < 16:
-        raise ValueError(f'Identification number (NIK) is too short ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too short ({len(idnum)} characters), length should be 16')
     elif len(idnum) > 16:
-        raise ValueError(f'Identification number (NIK) is too long ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too long ({len(idnum)} characters), length should be 16')
     else:
         raise 
 
@@ -103,9 +103,9 @@ def regdtm(idnum): # registration day in datetime data type
         rdtm = datetime.strptime(rcode, "%d%m%y")
         return rdtm
     elif len(idnum) < 16:
-        raise ValueError(f'Identification number (NIK) is too short ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too short ({len(idnum)} characters), length should be 16')
     elif len(idnum) > 16:
-        raise ValueError(f'Identification number (NIK) is too long ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too long ({len(idnum)} characters), length should be 16')
     else:
         raise 
 
@@ -119,9 +119,9 @@ def regday(idnum): # registration day in string data type
         rday = rdtm.strftime("%d %B %Y")
         return rday
     elif len(idnum) < 16:
-        raise ValueError(f'Identification number (NIK) is too short ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too short ({len(idnum)} characters), length should be 16')
     elif len(idnum) > 16:
-        raise ValueError(f'Identification number (NIK) is too long ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too long ({len(idnum)} characters), length should be 16')
     else:
         raise 
 
@@ -131,8 +131,8 @@ def nthpub(idnum):
         nth = int(idnum[13:])
         return nth
     elif len(idnum) < 16:
-        raise ValueError(f'Identification number (NIK) is too short ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too short ({len(idnum)} characters), length should be 16')
     elif len(idnum) > 16:
-        raise ValueError(f'Identification number (NIK) is too long ({len(idnum)} characters), length should be 16')
+        raise ValueError(f'Identification number (KK) is too long ({len(idnum)} characters), length should be 16')
     else:
         raise 
