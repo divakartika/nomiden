@@ -1,6 +1,8 @@
+import pandas as pd
 import nomiden
 from nomiden import nik
 from nomiden import kk
+from nomiden import reader
 
 print(nik.province(3213034912000005))
 print(nik.city(3213034912000005))
@@ -25,3 +27,20 @@ print(kk.regyear(3175042901099014))
 print(kk.regdtm(3175042901099014))
 print(kk.regday(3175042901099014))
 print(kk.nthpub(3175042901099014))
+
+df = pd.DataFrame([3213034912000005, 3175045506000006], columns=['NIK'])
+df['usia'] = df['NIK'].apply(nik.age)
+print(df)
+
+nik_list = []
+for i in [3213034912000005, 3175045506000006]:
+    print(nik.city(i))
+    nik_list.append(reader.nik(i))
+
+nik_df = pd.DataFrame.from_dict(nik_list)
+print(nik_df)
+
+nik_dict = reader.nik(3213034912000005)
+print(nik_dict)
+nik_df = pd.DataFrame.from_dict([nik_dict])
+print(nik_df)
