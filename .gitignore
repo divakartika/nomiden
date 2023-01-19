@@ -1,2 +1,5 @@
-*__pycache__
+*__pycache__*
 temp.ipynb
+*.egg-info
+dist
+dist/*
