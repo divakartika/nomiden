@@ -13,7 +13,7 @@ setup(
     author="Diva K",
     author_email="diva@algorit.ma",
     license="MIT",
-    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*", "npwp.py"]),
+    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*", "*npwp.*"]),
     include_package_data=True,
     install_requires=["pandas"],
     classifiers=[
