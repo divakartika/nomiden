@@ -31,10 +31,10 @@ Here are the things that **nomiden** can do for you:
 ## Where to get it
 The source code is currently hosted on GitHub at: https://github.com/divakartika/nomiden
 
-**nomiden** is available at the [Python Package Index (PyPI)](https://pypi.org/project/nomiden).
+**nomiden** is available at the [Test Python Package Index (Test PyPI)](https://test.pypi.org/project/nomiden/).
 
 ```sh
-pip install nomiden
+python -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple nomiden
 ```
 
 ## Dependencies
@@ -44,7 +44,7 @@ pip install nomiden
 [MIT](LICENSE)
 
 ## Documentation
---
+[nomiden Documentation](https://divakartika.notion.site/nomiden-Documentation-50ed0573bd7c44bc8337472cfbdb24d3) 
 
 ## Getting Help & Discussion
 
