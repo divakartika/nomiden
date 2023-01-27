@@ -88,7 +88,7 @@ def nthpub(idnum):
     return nth
 
 def kkreader(idnum):
-    kk_dict = {'NIK': province(idnum), 'city': city(idnum), 'district': district(idnum),
+    kk_dict = {'NIK': idnum, 'province': province(idnum), 'city': city(idnum), 'district': district(idnum),
             'regist_datetime': regdtm(idnum), 'regist_day': regday(idnum),
             'regist_code': nthpub(idnum)}
 

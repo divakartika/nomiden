@@ -21,10 +21,5 @@ setup(
         "Programming Language :: Python :: 3",
         "Operating System" " :: OS Independent",
     ],
-    # entry_points={
-    #     "console_scripts": [
-    #         "tq=taskquant.__main__:main",
-    #     ]
-    # },
-    python_requires=">=3.9"
+    python_requires=">=3.7"
 )

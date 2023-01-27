@@ -110,7 +110,7 @@ def nthperson(idnum):
 
 def nikreader(idnum):
     idnum = _check_length(idnum)
-    nik_dict = {'NIK': province(idnum), 'city': city(idnum), 'district': district(idnum),
+    nik_dict = {'NIK': idnum, 'province': province(idnum), 'city': city(idnum), 'district': district(idnum),
             'gender': gender(idnum), 'birth_datetime': birthdtm(idnum), 'birthday': birthday(idnum),
             'age': age(idnum), 'regist_code': nthperson(idnum)}
 
