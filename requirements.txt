@@ -17,12 +17,8 @@ entrypoints==0.4
 executing==0.8.3
 idna==3.4
 importlib-metadata==6.0.0
-ipykernel==6.15.2
-ipython==8.6.0
 jaraco.classes==3.2.3
 jedi==0.18.1
-jupyter_client==7.3.5
-jupyter_core==4.11.2
 keyring==23.13.1
 matplotlib-inline==0.1.6
 more-itertools==9.0.0
