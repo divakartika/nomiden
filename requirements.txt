@@ -4,12 +4,12 @@ beautifulsoup4==4.11.1
 bleach==5.0.1
 brotlipy==0.7.0
 bs4==0.0.1
-certifi==2022.9.24
+certifi==2022.12.7
 cffi==1.15.1
 charset-normalizer==2.0.4
 colorama==0.4.5
 commonmark==0.9.1
-cryptography==38.0.1
+cryptography==39.0.0
 debugpy==1.5.1
 decorator==5.1.1
 docutils==0.19
