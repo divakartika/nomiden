@@ -33,6 +33,10 @@ The source code is currently hosted on GitHub at: https://github.com/divakartika
 
 **nomiden** is available at the [Python Package Index (PyPI)](https://pypi.org/project/nomiden/).
 
+```sh
+pip install nomiden
+```
+
 ## Dependencies
 - [Pandas - Supports data-related operations](https://pandas.pydata.org)
 
