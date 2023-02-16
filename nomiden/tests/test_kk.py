@@ -39,14 +39,6 @@ class TestKK(unittest.TestCase):
             city = kk.city(idnum)
             self.assertIsInstance(city, str)
 
-    def test_kk_city(self):
-        for idnum in int_idnums:
-            city = kk.city(idnum)
-            self.assertIsInstance(city, str)
-        for idnum in str_idnums:
-            city = kk.city(idnum)
-            self.assertIsInstance(city, str)
-
     def test_kk_district(self):
         for idnum in int_idnums:
             dist = kk.district(idnum)
@@ -97,18 +89,18 @@ class TestKK(unittest.TestCase):
 
     def test_kk_nthpub(self):
         for idnum in int_idnums:
-            nth = kk.nthpub(idnum)
+            nth = kk.nth_pub(idnum)
             self.assertIsInstance(nth, int)
         for idnum in str_idnums:
-            nth = kk.nthpub(idnum)
+            nth = kk.nth_pub(idnum)
             self.assertIsInstance(nth, int)
 
     def test_kk_kkreader(self):
         for idnum in int_idnums:
-            kk_dict = kk.kkreader(idnum)
+            kk_dict = kk.all_info(idnum)
             self.assertIsInstance(kk_dict, dict)
         for idnum in str_idnums:
-            kk_dict = kk.kkreader(idnum)
+            kk_dict = kk.all_info(idnum)
             self.assertIsInstance(kk_dict, dict)
 
 if __name__ == '__main__':

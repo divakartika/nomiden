@@ -1,4 +1,5 @@
 import os
+from typing import Union
 from datetime import date, datetime
 import pandas as pd
 
@@ -6,7 +7,7 @@ this_dir, this_filename = os.path.split(__file__)
 DATA_PATH = os.path.join(this_dir, "data", "regioncode.csv")
 rc = pd.read_csv(DATA_PATH)
 
-def _check_length(idnum):
+def _check_length(idnum: Union[str, int]) -> str:
     idnum = str(idnum)
     if len(idnum) == 16:
         return idnum
@@ -17,20 +18,20 @@ def _check_length(idnum):
     else:
         raise ValueError(f'Identification number (KK) {len(idnum)} characters, length should be 16')
 
-def province(idnum):
+def province(idnum: Union[str, int]) -> str:
     idnum = _check_length(idnum)
     prov_code = idnum[:2]
     prov = rc.loc[rc['code'] == prov_code, 'region'].item()
     return prov
 
-def city(idnum):
+def city(idnum: Union[str, int]) -> str:
     idnum = _check_length(idnum)
     prov_code = idnum[:2]
     city_code = f'{prov_code}.{idnum[2:4]}'
     city = rc.loc[rc['code'] == city_code, 'region'].item()
     return city
 
-def district(idnum):
+def district(idnum: Union[str, int]) -> str:
     idnum = _check_length(idnum)
     prov_code = idnum[:2] # province
     city_code = f'{prov_code}.{idnum[2:4]}' # city
@@ -38,7 +39,7 @@ def district(idnum):
     dist = rc.loc[rc['code'] == dist_code, 'region'].item()
     return dist
 
-def regdate(idnum):
+def regdate(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
     rcode = idnum[6:12]
     if int(rcode[:2]) > 31:
@@ -47,7 +48,7 @@ def regdate(idnum):
     rdate = rdtm.day
     return rdate
 
-def regmonth(idnum):
+def regmonth(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
     rcode = idnum[6:12]
     if int(rcode[:2]) > 31:
@@ -56,7 +57,7 @@ def regmonth(idnum):
     rmonth = rdtm.month
     return rmonth
 
-def regyear(idnum):
+def regyear(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
     rcode = idnum[6:12]
     if int(rcode[:2]) > 31:
@@ -65,7 +66,7 @@ def regyear(idnum):
     ryear = rdtm.year
     return ryear
 
-def regdtm(idnum): # registration day in datetime data type
+def regdtm(idnum: Union[str, int]) -> datetime: # registration day in datetime data type
     idnum = _check_length(idnum)
     rcode = idnum[6:12]
     if int(rcode[:2]) > 31:
@@ -73,7 +74,7 @@ def regdtm(idnum): # registration day in datetime data type
     rdtm = datetime.strptime(rcode, "%d%m%y")
     return rdtm
 
-def regday(idnum): # registration day in string data type
+def regday(idnum: Union[str, int]) -> str: # registration day in string data type
     idnum = _check_length(idnum)
     rcode = idnum[6:12]
     if int(rcode[:2]) > 31:
@@ -82,14 +83,14 @@ def regday(idnum): # registration day in string data type
     rday = rdtm.strftime("%d %B %Y")
     return rday
 
-def nthpub(idnum):
+def nth_pub(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
     nth = int(idnum[13:])
     return nth
 
-def kkreader(idnum):
+def all_info(idnum: Union[str, int]) -> dict:
     kk_dict = {'NIK': idnum, 'province': province(idnum), 'city': city(idnum), 'district': district(idnum),
             'regist_datetime': regdtm(idnum), 'regist_day': regday(idnum),
-            'regist_code': nthpub(idnum)}
+            'regist_code': nth_pub(idnum)}
 
     return kk_dict

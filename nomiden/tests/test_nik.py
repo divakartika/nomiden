@@ -39,14 +39,6 @@ class TestNIK(unittest.TestCase):
             city = nik.city(idnum)
             self.assertIsInstance(city, str)
 
-    def test_nik_city(self):
-        for idnum in int_idnums:
-            city = nik.city(idnum)
-            self.assertIsInstance(city, str)
-        for idnum in str_idnums:
-            city = nik.city(idnum)
-            self.assertIsInstance(city, str)
-
     def test_nik_district(self):
         for idnum in int_idnums:
             dist = nik.district(idnum)
@@ -115,18 +107,18 @@ class TestNIK(unittest.TestCase):
 
     def test_nik_nthperson(self):
         for idnum in int_idnums:
-            nth = nik.nthperson(idnum)
+            nth = nik.nth_person(idnum)
             self.assertIsInstance(nth, int)
         for idnum in str_idnums:
-            nth = nik.nthperson(idnum)
+            nth = nik.nth_person(idnum)
             self.assertIsInstance(nth, int)
 
     def test_nik_nikreader(self):
         for idnum in int_idnums:
-            nik_dict = nik.nikreader(idnum)
+            nik_dict = nik.all_info(idnum)
             self.assertIsInstance(nik_dict, dict)
         for idnum in str_idnums:
-            nik_dict = nik.nikreader(idnum)
+            nik_dict = nik.all_info(idnum)
             self.assertIsInstance(nik_dict, dict)
 
 if __name__ == '__main__':
