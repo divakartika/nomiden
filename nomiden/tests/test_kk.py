@@ -3,8 +3,8 @@ import unittest
 from datetime import datetime
 from nomiden import kk
 
-int_idnums = [1101010101000000, 1101014101000000]
-str_idnums = ["1101010101000000", "1101014101000000"]
+int_idnums = [1101011001640000, 1101013101000000]
+str_idnums = ["1101011001640000", "1101013101000000"]
 
 class TestKK(unittest.TestCase):
     def test_invalid_idnum_error(self):

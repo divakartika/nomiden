@@ -18,6 +18,16 @@ def _check_length(idnum: Union[str, int]) -> str:
     else:
         raise ValueError(f'Identification number (KK) {len(idnum)} characters, length should be 16')
 
+def _check_reg(idnum: str) -> datetime:
+    rcode = idnum[6:12]
+    if int(rcode[:2]) > 31:
+        rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40), 1)
+    rdtm = datetime.strptime(rcode, "%d%m%y")
+    now = datetime.now()
+    if rdtm > now:
+        rdtm = rdtm.replace(year = rdtm.year - 100)
+    return rdtm
+
 def province(idnum: Union[str, int]) -> str:
     idnum = _check_length(idnum)
     prov_code = idnum[:2]
@@ -41,45 +51,30 @@ def district(idnum: Union[str, int]) -> str:
 
 def regdate(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
-    rcode = idnum[6:12]
-    if int(rcode[:2]) > 31:
-        rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40))
-    rdtm = datetime.strptime(rcode, "%d%m%y")
+    rdtm = _check_reg(idnum)
     rdate = rdtm.day
     return rdate
 
 def regmonth(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
-    rcode = idnum[6:12]
-    if int(rcode[:2]) > 31:
-        rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40))
-    rdtm = datetime.strptime(rcode, "%d%m%y")
+    rdtm = _check_reg(idnum)
     rmonth = rdtm.month
     return rmonth
 
 def regyear(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
-    rcode = idnum[6:12]
-    if int(rcode[:2]) > 31:
-        rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40))
-    rdtm = datetime.strptime(rcode, "%d%m%y")
+    rdtm = _check_reg(idnum)
     ryear = rdtm.year
     return ryear
 
 def regdtm(idnum: Union[str, int]) -> datetime: # registration day in datetime data type
     idnum = _check_length(idnum)
-    rcode = idnum[6:12]
-    if int(rcode[:2]) > 31:
-        rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40))
-    rdtm = datetime.strptime(rcode, "%d%m%y")
+    rdtm = _check_reg(idnum)
     return rdtm
 
 def regday(idnum: Union[str, int]) -> str: # registration day in string data type
     idnum = _check_length(idnum)
-    rcode = idnum[6:12]
-    if int(rcode[:2]) > 31:
-        rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40))
-    rdtm = datetime.strptime(rcode, "%d%m%y")
+    rdtm = _check_reg(idnum)
     rday = rdtm.strftime("%d %B %Y")
     return rday
 

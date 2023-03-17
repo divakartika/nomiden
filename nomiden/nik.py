@@ -18,6 +18,16 @@ def _check_length(idnum: Union[str, int]) -> str:
     else:
         raise ValueError(f'Identification number (NIK) {len(idnum)} characters, length should be 16')
 
+def _check_birth(idnum: str) -> datetime:
+    bcode = idnum[6:12]
+    if int(bcode[:2]) > 31:
+        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40), 1)
+    bdtm = datetime.strptime(bcode, "%d%m%y")
+    now = datetime.now()
+    if bdtm > now:
+        bdtm = bdtm.replace(year = bdtm.year - 100)
+    return bdtm
+
 def province(idnum: Union[str, int]) -> str:
     idnum = _check_length(idnum)
     prov_code = idnum[:2]
@@ -52,54 +62,36 @@ def gender(idnum: Union[str, int]) -> str:
 
 def birthdate(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
-    bcode = idnum[6:12]
-    if int(bcode[:2]) > 31:
-        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40))
-    bdtm = datetime.strptime(bcode, "%d%m%y")
+    bdtm = _check_birth(idnum)
     bdate = bdtm.day
     return bdate
 
 def birthmonth(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
-    bcode = idnum[6:12]
-    if int(bcode[:2]) > 31:
-        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40))
-    bdtm = datetime.strptime(bcode, "%d%m%y")
+    bdtm = _check_birth(idnum)
     bmonth = bdtm.month
     return bmonth
 
 def birthyear(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
-    bcode = idnum[6:12]
-    if int(bcode[:2]) > 31:
-        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40))
-    bdtm = datetime.strptime(bcode, "%d%m%y")
+    bdtm = _check_birth(idnum)
     byear = bdtm.year
     return byear
 
 def birthdtm(idnum: Union[str, int]) -> datetime: # birthday in datetime data type
     idnum = _check_length(idnum)
-    bcode = idnum[6:12]
-    if int(bcode[:2]) > 31:
-        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40))
-    bdtm = datetime.strptime(bcode, "%d%m%y")
+    bdtm = _check_birth(idnum)
     return bdtm
 
 def birthday(idnum: Union[str, int]) -> str: # birthday in string data type
     idnum = _check_length(idnum)
-    bcode = idnum[6:12]
-    if int(bcode[:2]) > 31:
-        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40))
-    bdtm = datetime.strptime(bcode, "%d%m%y")
+    bdtm = _check_birth(idnum)
     bday = bdtm.strftime("%d %B %Y")
     return bday
 
 def age(idnum: Union[str, int]) -> int:
     idnum = _check_length(idnum)
-    bcode = idnum[6:12]
-    if int(bcode[:2]) > 31:
-        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40))
-    bdtm = datetime.strptime(bcode, "%d%m%y")
+    bdtm = _check_birth(idnum)
     today = date.today()
     age = today.year - bdtm.year - ((today.month, today.day) < (bdtm.month, bdtm.day))
     return age

@@ -50,6 +50,9 @@ pip install nomiden
 ## Development
 This package was built under Python 3.10.8 for Windows 10 and passed the Github Actions: Python package tests under Python 3.8, 3.9, and 3.10 for Ubuntu-latest, MacOS-latest, Windows-latest. To contribute for development, please use [requirements.txt](https://github.com/divakartika/nomiden/blob/main/requirements.txt).
 
+## Data Source
+Region code data used in this package is retrieved from [kodewilayah](https://github.com/kodewilayah/permendagri-72-2019) based on the Regulation of the Minister of Home Affairs number 72 of 2019 (Permendagri No. 72 tahun 2019).
+
 ## Getting Help & Discussion
 
 For usage questions and development discussions, feel free to contact diva@algorit.ma.
