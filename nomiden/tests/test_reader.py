@@ -3,7 +3,7 @@ import unittest
 from datetime import datetime
 from nomiden import reader
 
-int_idnums = [1101016401640000, 1101014101000000]
+int_idnums = [1101016401640000, 1101014101000000, 7213021916590005]
 str_idnums = ["1101016401640000", "1101014101000000"]
 df_idnums = pd.DataFrame({"idnum": str_idnums})
 
@@ -29,20 +29,20 @@ class TestNIKReader(unittest.TestCase):
     def test_nik_city(self):
         for idnum in int_idnums:
             city = reader.NIK(idnum).city
-            self.assertIsInstance(city, str)
+            self.assertIsInstance(city, (str, float))
         for idnum in str_idnums:
             city = reader.NIK(idnum).city
-            self.assertIsInstance(city, str)
+            self.assertIsInstance(city, (str, float))
         city_series = df_idnums['idnum'].apply(lambda x: reader.NIK(x).city)
         self.assertIsInstance(city_series, pd.Series)
 
     def test_nik_district(self):
         for idnum in int_idnums:
             dist = reader.NIK(idnum).district
-            self.assertIsInstance(dist, str)
+            self.assertIsInstance(dist, (str, float))
         for idnum in str_idnums:
             dist = reader.NIK(idnum).district
-            self.assertIsInstance(dist, str)
+            self.assertIsInstance(dist, (str, float))
         dist_series = df_idnums['idnum'].apply(lambda x: reader.NIK(x).district)
         self.assertIsInstance(dist_series, pd.Series)
 
@@ -148,30 +148,30 @@ class TestKKReader(unittest.TestCase):
     def test_kk_province(self):
         for idnum in int_idnums:
             prov = reader.KK(idnum).province
-            self.assertIsInstance(prov, str)
+            self.assertIsInstance(prov, (str, float))
         for idnum in str_idnums:
             prov = reader.KK(idnum).province
-            self.assertIsInstance(prov, str)
+            self.assertIsInstance(prov, (str, float))
         prov_series = df_idnums['idnum'].apply(lambda x: reader.KK(x).province)
         self.assertIsInstance(prov_series, pd.Series)
 
     def test_kk_city(self):
         for idnum in int_idnums:
             city = reader.KK(idnum).city
-            self.assertIsInstance(city, str)
+            self.assertIsInstance(city, (str, float))
         for idnum in str_idnums:
             city = reader.KK(idnum).city
-            self.assertIsInstance(city, str)
+            self.assertIsInstance(city, (str, float))
         city_series = df_idnums['idnum'].apply(lambda x: reader.KK(x).city)
         self.assertIsInstance(city_series, pd.Series)
 
     def test_kk_district(self):
         for idnum in int_idnums:
             dist = reader.KK(idnum).district
-            self.assertIsInstance(dist, str)
+            self.assertIsInstance(dist, (str, float))
         for idnum in str_idnums:
             dist = reader.KK(idnum).district
-            self.assertIsInstance(dist, str)
+            self.assertIsInstance(dist, (str, float))
         dist_series = df_idnums['idnum'].apply(lambda x: reader.KK(x).district)
         self.assertIsInstance(dist_series, pd.Series)
     

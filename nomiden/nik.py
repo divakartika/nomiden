@@ -2,6 +2,7 @@ import os
 from typing import Union
 from datetime import date, datetime
 import pandas as pd
+import numpy as np
 
 this_dir, this_filename = os.path.split(__file__)
 DATA_PATH = os.path.join(this_dir, "data", "regioncode.csv")
@@ -22,31 +23,44 @@ def _check_birth(idnum: str) -> datetime:
     bcode = idnum[6:12]
     if int(bcode[:2]) > 31:
         bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40), 1)
-    bdtm = datetime.strptime(bcode, "%d%m%y")
-    now = datetime.now()
-    if bdtm > now:
-        bdtm = bdtm.replace(year = bdtm.year - 100)
+    try:
+        bdtm = datetime.strptime(bcode, "%d%m%y")
+        now = datetime.now()
+        if bdtm > now:
+            bdtm = bdtm.replace(year = bdtm.year - 100)
+    except:
+        # return today's date if birth date is invalid
+        bdtm = datetime.now()
     return bdtm
 
-def province(idnum: Union[str, int]) -> str:
+def province(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     prov_code = idnum[:2]
-    prov = rc.loc[rc['code'] == prov_code, 'region'].item()
+    try:
+        prov = rc.loc[rc['code'] == prov_code, 'region'].item()
+    except:
+        prov = float('nan')
     return prov
 
-def city(idnum: Union[str, int]) -> str:
+def city(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     prov_code = idnum[:2]
     city_code = f'{prov_code}.{idnum[2:4]}'
-    city = rc.loc[rc['code'] == city_code, 'region'].item()
+    try:
+        city = rc.loc[rc['code'] == city_code, 'region'].item()
+    except:
+        city = float('nan')
     return city
 
-def district(idnum: Union[str, int]) -> str:
+def district(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     prov_code = idnum[:2] # province
     city_code = f'{prov_code}.{idnum[2:4]}' # city
     dist_code = f'{city_code}.{idnum[4:6]}' # district / kecamatan
-    dist = rc.loc[rc['code'] == dist_code, 'region'].item()
+    try:
+        dist = rc.loc[rc['code'] == dist_code, 'region'].item()
+    except:
+        dist = float('nan')
     return dist
 
 def gender(idnum: Union[str, int]) -> str:
@@ -89,11 +103,14 @@ def birthday(idnum: Union[str, int]) -> str: # birthday in string data type
     bday = bdtm.strftime("%d %B %Y")
     return bday
 
-def age(idnum: Union[str, int]) -> int:
+def age(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     bdtm = _check_birth(idnum)
     today = date.today()
-    age = today.year - bdtm.year - ((today.month, today.day) < (bdtm.month, bdtm.day))
+    try:
+        age = today.year - bdtm.year - ((today.month, today.day) < (bdtm.month, bdtm.day))
+    except:
+        age = float('nan')
     return age
 
 def nth_person(idnum: Union[str, int]) -> int:

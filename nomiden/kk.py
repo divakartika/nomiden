@@ -2,6 +2,7 @@ import os
 from typing import Union
 from datetime import date, datetime
 import pandas as pd
+import numpy as np
 
 this_dir, this_filename = os.path.split(__file__)
 DATA_PATH = os.path.join(this_dir, "data", "regioncode.csv")
@@ -22,31 +23,44 @@ def _check_reg(idnum: str) -> datetime:
     rcode = idnum[6:12]
     if int(rcode[:2]) > 31:
         rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40), 1)
-    rdtm = datetime.strptime(rcode, "%d%m%y")
-    now = datetime.now()
-    if rdtm > now:
-        rdtm = rdtm.replace(year = rdtm.year - 100)
+    try:
+        rdtm = datetime.strptime(rcode, "%d%m%y")
+        now = datetime.now()
+        if rdtm > now:
+            rdtm = rdtm.replace(year = rdtm.year - 100)
+    except:
+        # return today's date if registration date is invalid
+        rdtm = datetime.now()
     return rdtm
 
-def province(idnum: Union[str, int]) -> str:
+def province(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     prov_code = idnum[:2]
-    prov = rc.loc[rc['code'] == prov_code, 'region'].item()
+    try:
+        prov = rc.loc[rc['code'] == prov_code, 'region'].item()
+    except:
+        prov = float('nan')
     return prov
 
-def city(idnum: Union[str, int]) -> str:
+def city(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     prov_code = idnum[:2]
     city_code = f'{prov_code}.{idnum[2:4]}'
-    city = rc.loc[rc['code'] == city_code, 'region'].item()
+    try:
+        city = rc.loc[rc['code'] == city_code, 'region'].item()
+    except:
+        city = float('nan')
     return city
 
-def district(idnum: Union[str, int]) -> str:
+def district(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     prov_code = idnum[:2] # province
     city_code = f'{prov_code}.{idnum[2:4]}' # city
     dist_code = f'{city_code}.{idnum[4:6]}' # district / kecamatan
-    dist = rc.loc[rc['code'] == dist_code, 'region'].item()
+    try:
+        dist = rc.loc[rc['code'] == dist_code, 'region'].item()
+    except:
+        dist = float('nan')
     return dist
 
 def regdate(idnum: Union[str, int]) -> int:
