@@ -19,7 +19,7 @@ def _check_length(idnum: Union[str, int]) -> str:
     else:
         raise ValueError(f'Identification number (KK) {len(idnum)} characters, length should be 16')
 
-def _check_reg(idnum: str) -> datetime:
+def _check_reg(idnum: str):
     rcode = idnum[6:12]
     if int(rcode[:2]) > 31:
         rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40), 1)
@@ -29,8 +29,8 @@ def _check_reg(idnum: str) -> datetime:
         if rdtm > now:
             rdtm = rdtm.replace(year = rdtm.year - 100)
     except:
-        # return today's date if registration date is invalid
-        rdtm = datetime.now()
+        # return NaN if registration date is invalid
+        rdtm = float('nan')
     return rdtm
 
 def province(idnum: Union[str, int]):
@@ -63,33 +63,45 @@ def district(idnum: Union[str, int]):
         dist = float('nan')
     return dist
 
-def regdate(idnum: Union[str, int]) -> int:
+def regdate(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     rdtm = _check_reg(idnum)
-    rdate = rdtm.day
+    try:
+        rdate = rdtm.day
+    except:
+        rdate = float('nan')
     return rdate
 
-def regmonth(idnum: Union[str, int]) -> int:
+def regmonth(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     rdtm = _check_reg(idnum)
-    rmonth = rdtm.month
+    try:
+        rmonth = rdtm.month
+    except:
+        rmonth = float('nan')
     return rmonth
 
-def regyear(idnum: Union[str, int]) -> int:
+def regyear(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     rdtm = _check_reg(idnum)
-    ryear = rdtm.year
+    try:
+        ryear = rdtm.year
+    except:
+        ryear = float('nan')
     return ryear
 
-def regdtm(idnum: Union[str, int]) -> datetime: # registration day in datetime data type
+def regdtm(idnum: Union[str, int]): # registration day in datetime data type
     idnum = _check_length(idnum)
     rdtm = _check_reg(idnum)
     return rdtm
 
-def regday(idnum: Union[str, int]) -> str: # registration day in string data type
+def regday(idnum: Union[str, int]): # registration day in string data type
     idnum = _check_length(idnum)
     rdtm = _check_reg(idnum)
-    rday = rdtm.strftime("%d %B %Y")
+    try:
+        rday = rdtm.strftime("%d %B %Y")
+    except:
+        rday = float('nan')
     return rday
 
 def nth_pub(idnum: Union[str, int]) -> int:

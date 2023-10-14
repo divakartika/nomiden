@@ -19,7 +19,7 @@ def _check_length(idnum: Union[str, int]) -> str:
     else:
         raise ValueError(f'Identification number (NIK) {len(idnum)} characters, length should be 16')
 
-def _check_birth(idnum: str) -> datetime:
+def _check_birth(idnum: str):
     bcode = idnum[6:12]
     if int(bcode[:2]) > 31:
         bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40), 1)
@@ -29,8 +29,8 @@ def _check_birth(idnum: str) -> datetime:
         if bdtm > now:
             bdtm = bdtm.replace(year = bdtm.year - 100)
     except:
-        # return today's date if birth date is invalid
-        bdtm = datetime.now()
+        # return NaN if birth date is invalid
+        bdtm = float('nan')
     return bdtm
 
 def province(idnum: Union[str, int]):
@@ -74,33 +74,45 @@ def gender(idnum: Union[str, int]) -> str:
         raise ValueError("Identification number (NIK) invalid, character[6:8] must be between 1 to 71")
     return gend
 
-def birthdate(idnum: Union[str, int]) -> int:
+def birthdate(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     bdtm = _check_birth(idnum)
-    bdate = bdtm.day
+    try:
+        bdate = bdtm.day
+    except:
+        bdate = float('nan')
     return bdate
 
-def birthmonth(idnum: Union[str, int]) -> int:
+def birthmonth(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     bdtm = _check_birth(idnum)
-    bmonth = bdtm.month
+    try:
+        bmonth = bdtm.month
+    except:
+        bmonth = float('nan')
     return bmonth
 
-def birthyear(idnum: Union[str, int]) -> int:
+def birthyear(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     bdtm = _check_birth(idnum)
-    byear = bdtm.year
+    try:
+        byear = bdtm.year
+    except:
+        byear = float('nan')
     return byear
 
-def birthdtm(idnum: Union[str, int]) -> datetime: # birthday in datetime data type
+def birthdtm(idnum: Union[str, int]): # birthday in datetime data type
     idnum = _check_length(idnum)
     bdtm = _check_birth(idnum)
     return bdtm
 
-def birthday(idnum: Union[str, int]) -> str: # birthday in string data type
+def birthday(idnum: Union[str, int]): # birthday in string data type
     idnum = _check_length(idnum)
     bdtm = _check_birth(idnum)
-    bday = bdtm.strftime("%d %B %Y")
+    try:
+        bday = bdtm.strftime("%d %B %Y")
+    except:
+        bday = float('nan')
     return bday
 
 def age(idnum: Union[str, int]):
@@ -113,7 +125,7 @@ def age(idnum: Union[str, int]):
         age = float('nan')
     return age
 
-def nth_person(idnum: Union[str, int]) -> int:
+def nth_person(idnum: Union[str, int]):
     idnum = _check_length(idnum)
     nth = int(idnum[13:])
     return nth

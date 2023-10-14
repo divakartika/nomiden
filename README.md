@@ -1,6 +1,6 @@
 # nomiden
 
-![nomiden code example](images/nomiden2.png)
+![nomiden code example](https://raw.githubusercontent.com/divakartika/nomiden/main/images/nomiden2.png)
 
 ## What is it?
 
@@ -54,6 +54,14 @@ This package was built under Python 3.10.8 for Windows 10 and passed the Github 
 
 ## Data Source
 Region code data used in this package is retrieved from [kodewilayah](https://github.com/kodewilayah/permendagri-72-2019) based on the Regulation of the Minister of Home Affairs number 72 of 2019 (Permendagri No. 72 tahun 2019).
+
+## Release Notes
+
+### v0.0.6
+Return `NaN` if birth date (NIK) or registration date (KK) is invalid.
+
+### v0.0.5
+Return `NaN` if region code is invalid.
 
 ## Getting Help & Discussion
 
