@@ -1,5 +1,5 @@
-myst-nb
-sphinx-autoapi==3.0.0
+myst-nb==0.17.2
+sphinx-autoapi
 sphinx-rtd-theme
 nbsphinx
 pandas
