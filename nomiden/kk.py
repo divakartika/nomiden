@@ -22,7 +22,7 @@ def _check_length(idnum: Union[str, int]) -> str:
 def _check_reg(idnum: str):
     rcode = idnum[6:12]
     if int(rcode[:2]) > 31:
-        rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40), 1)
+        rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40).zfill(2), 1)
     try:
         rdtm = datetime.strptime(rcode, "%d%m%y")
         now = datetime.now()

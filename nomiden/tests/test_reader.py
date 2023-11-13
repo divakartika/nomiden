@@ -3,8 +3,8 @@ import unittest
 from datetime import datetime
 from nomiden import reader
 
-int_idnums = [1101016401640000, 1101014101000000, 7213023102590005]
-str_idnums = ["1101016401640000", "1101014101000000", "7213023102590005"]
+int_idnums = [1101016401640000, 1101014101000000, 7213023102590005, 7304064302440007]
+str_idnums = ["1101016401640000", "1101014101000000", "7213023102590005", "7304064302440007"]
 df_idnums = pd.DataFrame({"idnum": str_idnums})
 
 class TestNIKReader(unittest.TestCase):

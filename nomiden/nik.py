@@ -22,7 +22,7 @@ def _check_length(idnum: Union[str, int]) -> str:
 def _check_birth(idnum: str):
     bcode = idnum[6:12]
     if int(bcode[:2]) > 31:
-        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40), 1)
+        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40).zfill(2), 1)
     try:
         bdtm = datetime.strptime(bcode, "%d%m%y")
         now = datetime.now()
