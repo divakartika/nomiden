@@ -26,8 +26,8 @@ autoapi_dirs = ["../nomiden"]
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["*test*", "*tests*", "nik.py", "kk.py"]
-autoapi_ignore = ["*/test_*.py", "*/tests/", "*/test*", "*/nik.py", "*/kk.py"]
+exclude_patterns = ["*test*", "*tests*"]#, "nik.py", "kk.py"]
+autoapi_ignore = ["*/test_*.py", "*/tests/", "*/test*"]#, "*/nik.py", "*/kk.py"]
 
 # -- Options for HTML output
 
