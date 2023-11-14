@@ -1,2 +1,2 @@
 include *.csv
-include nomiden/data/regioncode.csv
+include nomiden/data/regcode.csv

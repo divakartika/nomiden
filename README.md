@@ -57,6 +57,9 @@ Region code data used in this package is retrieved from [kodewilayah](https://gi
 
 ## Release Notes
 
+### v0.0.7
+Bug fixes and performance improvement.
+
 ### v0.0.6
 Return `NaN` if birth date (NIK) or registration date (KK) is invalid.
 

@@ -2,10 +2,9 @@ import os
 from typing import Union
 from datetime import date, datetime
 import pandas as pd
-import numpy as np
 
 this_dir, this_filename = os.path.split(__file__)
-DATA_PATH = os.path.join(this_dir, "data", "regioncode.csv")
+DATA_PATH = os.path.join(this_dir, "data", "regcode.csv")
 rc = pd.read_csv(DATA_PATH)
 
 def _check_length(idnum: Union[str, int]) -> str:
@@ -22,7 +21,7 @@ def _check_length(idnum: Union[str, int]) -> str:
 def _check_birth(idnum: str):
     bcode = idnum[6:12]
     if int(bcode[:2]) > 31:
-        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40), 1)
+        bcode = bcode.replace(bcode[:2], str(int(bcode[:2]) - 40).zfill(2), 1)
     try:
         bdtm = datetime.strptime(bcode, "%d%m%y")
         now = datetime.now()
@@ -35,7 +34,7 @@ def _check_birth(idnum: str):
 
 def province(idnum: Union[str, int]):
     idnum = _check_length(idnum)
-    prov_code = idnum[:2]
+    prov_code = int(idnum[:2])
     try:
         prov = rc.loc[rc['code'] == prov_code, 'region'].item()
     except:
@@ -44,8 +43,7 @@ def province(idnum: Union[str, int]):
 
 def city(idnum: Union[str, int]):
     idnum = _check_length(idnum)
-    prov_code = idnum[:2]
-    city_code = f'{prov_code}.{idnum[2:4]}'
+    city_code = int(idnum[:4])
     try:
         city = rc.loc[rc['code'] == city_code, 'region'].item()
     except:
@@ -54,9 +52,7 @@ def city(idnum: Union[str, int]):
 
 def district(idnum: Union[str, int]):
     idnum = _check_length(idnum)
-    prov_code = idnum[:2] # province
-    city_code = f'{prov_code}.{idnum[2:4]}' # city
-    dist_code = f'{city_code}.{idnum[4:6]}' # district / kecamatan
+    dist_code = int(idnum[:6])
     try:
         dist = rc.loc[rc['code'] == dist_code, 'region'].item()
     except:
@@ -132,7 +128,7 @@ def nth_person(idnum: Union[str, int]):
 
 def all_info(idnum: Union[str, int]) -> dict:
     idnum = _check_length(idnum)
-    nik_dict = {'NIK': idnum, 'province': province(idnum), 'city': city(idnum), 'district': district(idnum),
+    nik_dict = {'NIK': int(idnum), 'province': province(idnum), 'city': city(idnum), 'district': district(idnum),
             'gender': gender(idnum), 'birth_datetime': birthdtm(idnum), 'birthday': birthday(idnum),
             'age': age(idnum), 'regist_code': nth_person(idnum)}
 

@@ -2,10 +2,9 @@ import os
 from typing import Union
 from datetime import date, datetime
 import pandas as pd
-import numpy as np
 
 this_dir, this_filename = os.path.split(__file__)
-DATA_PATH = os.path.join(this_dir, "data", "regioncode.csv")
+DATA_PATH = os.path.join(this_dir, "data", "regcode.csv")
 rc = pd.read_csv(DATA_PATH)
 
 def _check_length(idnum: Union[str, int]) -> str:
@@ -22,7 +21,7 @@ def _check_length(idnum: Union[str, int]) -> str:
 def _check_reg(idnum: str):
     rcode = idnum[6:12]
     if int(rcode[:2]) > 31:
-        rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40), 1)
+        rcode = rcode.replace(rcode[:2], str(int(rcode[:2]) - 40).zfill(2), 1)
     try:
         rdtm = datetime.strptime(rcode, "%d%m%y")
         now = datetime.now()
@@ -35,7 +34,7 @@ def _check_reg(idnum: str):
 
 def province(idnum: Union[str, int]):
     idnum = _check_length(idnum)
-    prov_code = idnum[:2]
+    prov_code = int(idnum[:2])
     try:
         prov = rc.loc[rc['code'] == prov_code, 'region'].item()
     except:
@@ -44,8 +43,7 @@ def province(idnum: Union[str, int]):
 
 def city(idnum: Union[str, int]):
     idnum = _check_length(idnum)
-    prov_code = idnum[:2]
-    city_code = f'{prov_code}.{idnum[2:4]}'
+    city_code = int(idnum[:4])
     try:
         city = rc.loc[rc['code'] == city_code, 'region'].item()
     except:
@@ -54,9 +52,7 @@ def city(idnum: Union[str, int]):
 
 def district(idnum: Union[str, int]):
     idnum = _check_length(idnum)
-    prov_code = idnum[:2] # province
-    city_code = f'{prov_code}.{idnum[2:4]}' # city
-    dist_code = f'{city_code}.{idnum[4:6]}' # district / kecamatan
+    dist_code = int(idnum[:6])
     try:
         dist = rc.loc[rc['code'] == dist_code, 'region'].item()
     except:
@@ -110,7 +106,7 @@ def nth_pub(idnum: Union[str, int]) -> int:
     return nth
 
 def all_info(idnum: Union[str, int]) -> dict:
-    kk_dict = {'NIK': idnum, 'province': province(idnum), 'city': city(idnum), 'district': district(idnum),
+    kk_dict = {'NIK': int(idnum), 'province': province(idnum), 'city': city(idnum), 'district': district(idnum),
             'regist_datetime': regdtm(idnum), 'regist_day': regday(idnum),
             'regist_code': nth_pub(idnum)}
 
